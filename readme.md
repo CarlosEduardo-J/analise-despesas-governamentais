@@ -41,7 +41,7 @@ O projeto culminou em três áreas de *insights* principais:
 
 ### 3. Análise Descritiva de Gasto
 
-* Ranqueamento dos **Top 10** e **Bottom 10** órgãos por **Valor Pago** total, identificando a **concentração de despesas**.
+* Ranqueamento dos **Top 10** e **10 Menores** órgãos por **Valor Pago** total, identificando a **concentração de despesas**.
 
 ---
 
