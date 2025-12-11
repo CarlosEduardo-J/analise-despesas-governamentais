@@ -57,4 +57,4 @@ O projeto culminou em três áreas de *insights* principais:
 O código foi dividido em dois notebooks para organizar o pipeline de análise (seguindo o princípio de **separação de preocupações**):
 
 1.  **`analise_base.ipynb`:** Contém a **limpeza de dados, tratamento de outliers e geração das colunas de Taxa de Pagamento/Liquidação**.
-2.  **`analise_final.ipynb`:** Contém a **análise descritiva, análise temporal e a geração dos gráficos de ranqueamento (Top/Bottom 10 Eficiência)**, focando na apresentação dos *insights*.
+2.  **`analise_final.ipynb`:** Contém a **análise descritiva, análise temporal e a geração dos gráficos de ranqueamento (Top/Menores 10 Eficiência)**, focando na apresentação dos *insights*.
