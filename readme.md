@@ -1,60 +1,130 @@
-# 💰 Análise de Desempenho e Eficiência de Despesas Governamentais (Python/Pandas)
+# 💰 Análise de Desempenho e Eficiência de Despesas Governamentais  
+### 📊 Python • Pandas • Análise de Dados Públicos
 
-## 🎯 Objetivo do Projeto: Desafio com Dados Reais
+## 🎯 Objetivo do Projeto
 
-Este projeto foi desenvolvido com o propósito de enfrentar um **desafio real** de Data Science: trabalhar com uma base de dados pública comumente encontrada em ambientes de trabalho—**cheia de inconsistências, formatos misturados e dados sujos (outliers e erros de registro)**.
+Este projeto foi desenvolvido com o propósito de enfrentar um **desafio real de Data Science**: trabalhar com uma base de dados pública, comum em ambientes corporativos, caracterizada por:
 
-O objetivo principal foi transformar dados brutos de despesas governamentais em *insights* de **desempenho orçamentário e eficiência de caixa**, ranqueando órgãos públicos com base na velocidade e eficácia de seus pagamentos.
+- Inconsistências de preenchimento  
+- Formatos misturados  
+- Dados sujos (outliers, valores inválidos e erros de registro)
 
-## 🛠️ Aprendizados e Desafios Superados
+O objetivo principal foi transformar **dados brutos de despesas governamentais** em *insights* de **desempenho orçamentário e eficiência de caixa**, ranqueando órgãos públicos com base na **velocidade e eficácia dos pagamentos**.
 
-Este projeto foi excepcionalmente desafiador e proporcionou um aprendizado profundo, especialmente nas seguintes áreas:
+---
 
-### 1. Limpeza e Tratamento de Dados (ETL)
+## 🧠 Aprendizados e Desafios Superados
 
-* **Valores Monetários Complexos:** Foi necessário criar um robusto encadeamento de métodos (`.str.replace()`) para padronizar e converter strings monetárias (formato brasileiro `1.000,00`) para o tipo numérico `float`, corrigindo pontos e vírgulas.
-* **Tratamento de Outliers e Erros:** Utilização do `.clip(lower=0)` para neutralizar valores negativos em Empenhado e Liquidado (prováveis estornos), garantindo a integridade dos cálculos.
-* **Divisão por Zero:** Uso do `numpy.where` e `np.nan` para calcular as Taxas de Eficiência, tratando casos onde o denominador era zero e evitando resultados `inf` (Infinito) na média.
+Este projeto proporcionou um aprendizado profundo, especialmente nas etapas de **ETL** e criação de **métricas de negócio**.
 
-### 2. Geração de Métricas Diagnósticas (KPIs)
+### 🔹 1. Limpeza e Tratamento de Dados (ETL)
 
-O maior valor do projeto foi ir além do gasto total, criando Indicadores-Chave de Desempenho (KPIs) essenciais para o diagnóstico:
+- **Valores monetários complexos:**  
+  Padronização de strings no formato brasileiro (`1.000,00`) para valores numéricos (`float`) utilizando encadeamento de `.str.replace()`.
 
-* **Taxa de Liquidação:** (Liquidado / Empenhado) — Mede o quanto do valor prometido foi confirmado.
-* **Taxa de Pagamento (KPI Principal):** (Pago / Liquidado) — **Mede a eficiência do fluxo de caixa e a gestão de passivos.**
+- **Tratamento de outliers e erros:**  
+  Uso de `.clip(lower=0)` para neutralizar valores negativos em colunas como *Empenhado* e *Liquidado* (possíveis estornos).
 
-> **Valor Adicionado:** A criação destas métricas permitiu que a análise se movesse de uma simples contagem de gastos para um diagnóstico de **eficiência** e **saúde financeira** dos órgãos.
+- **Divisão por zero:**  
+  Aplicação de `numpy.where` e `np.nan` para evitar valores infinitos (`inf`) no cálculo das taxas de eficiência.
+
+---
+
+### 🔹 2. Criação de KPIs Diagnósticos
+
+O foco do projeto foi ir além do volume de gastos, criando **indicadores de eficiência financeira**:
+
+- **Taxa de Liquidação**  
+  `(Valor Liquidado / Valor Empenhado)`  
+  → Mede o quanto do valor prometido foi efetivamente confirmado.
+
+- **Taxa de Pagamento (KPI Principal)**  
+  `(Valor Pago / Valor Liquidado)`  
+  → Mede a eficiência do fluxo de caixa e a gestão de passivos.
+
+> **Valor agregado:** Essas métricas permitem avaliar não apenas *quanto* se gasta, mas *quão bem* os recursos são geridos.
+
+---
 
 ## 📊 Principais Análises e Insights
 
-O projeto culminou em três áreas de *insights* principais:
+### 📌 1. Ranking de Eficiência de Pagamento
 
-### 1. Ranqueamento de Eficiência de Pagamento
+- Ranking dos órgãos com base na **Taxa de Pagamento**
+- Identificação de:
+  - Órgãos com taxa **> 1.0**, indicando pagamento de *Restos a Pagar*
+  - Órgãos com baixa eficiência (**< 0.8**), que exigem maior atenção
 
-* Gráficos de barra que ranqueiam os órgãos pela `Taxa de Pagamento`.
-* **Insight:** Identificação clara de órgãos com Taxa **$> 1.0$** (que estão ativamente pagando **Restos a Pagar** e limpando **passivos**, como o **Ministério da Fazenda**) e órgãos com baixa eficiência (Taxa **$< 0.8$**, como o **Ministério dos Direitos Humanos**), que exigem investigação.
+📷 *Exemplo de visualização:*
 
-### 2. Análise Temporal (Sazonalidade)
+![Top 10 Mais Eficientes](top10_mais_eficientes.png)  
+![Top 10 Menos Eficientes](top10_menos_eficientes.png)
 
-* Visualização da **Evolução Mensal do Valor Pago vs. Valor Liquidado**.
-* **Insight:** Demonstra a **sazonalidade** do gasto governamental, com picos de saída de caixa (Valor Pago) em meses específicos, influenciados pelo pagamento de **obrigações antigas**.
+---
 
-### 3. Análise Descritiva de Gasto
+### 📌 2. Análise Temporal (Sazonalidade)
 
-* Ranqueamento dos **Top 10** e **10 Menores** órgãos por **Valor Pago** total, identificando a **concentração de despesas**.
+- Comparação entre **Valor Pago x Valor Liquidado ao longo do tempo**
+- Identificação de picos sazonais de saída de caixa
+
+📷 *Visualização:*
+
+![Evolução Mensal](evolucao_mensal.png)
+
+---
+
+### 📌 3. Análise Descritiva de Gastos
+
+- Ranking dos **Top 10 órgãos com maior valor pago**
+- Identificação da **concentração de despesas** entre poucos órgãos
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Python:** Linguagem de programação principal.
-* **Pandas:** Manipulação, limpeza e transformação de dados (ETL).
-* **NumPy:** Tratamento de erros matemáticos e criação de lógica condicional (Taxas de Eficiência).
-* **Matplotlib/Seaborn:** Visualização e geração de gráficos de ranqueamento e séries temporais.
+- **Python** – Linguagem principal  
+- **Pandas** – Limpeza, transformação e análise de dados (ETL)  
+- **NumPy** – Tratamento matemático e lógica condicional  
+- **Matplotlib / Seaborn** – Visualização de dados e gráficos
+
+---
+
+## ▶️ Como Executar o Projeto
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/CarlosEduardo-J/ANALISE-ORGAO
+```
+
+2. Instale as dependências:
+```bash
+pip install -r requirements.txt
+```
+
+3. Execute os notebooks nesta ordem:
+
+analise_base.ipynb → Limpeza, tratamento e criação dos KPIs
+
+analise_final.ipynb → Análises, rankings e visualizações
+
+## 🗂️ Fonte dos Dados
+
+Origem: Dados públicos de despesas governamentais
+
+Formato: CSV
+
+Arquivo: despesasPorOrgao.csv
+
+Base pública utilizada para simular um cenário real de análise de dados governamentais, com problemas comuns encontrados no mercado.
 
 ## 📁 Estrutura do Repositório
-
-O código foi dividido em dois notebooks para organizar o pipeline de análise (seguindo o princípio de **separação de preocupações**):
-
-1.  **`analise_base.ipynb`:** Contém a **limpeza de dados, tratamento de outliers e geração das colunas de Taxa de Pagamento/Liquidação**.
-2.  **`analise_final.ipynb`:** Contém a **análise descritiva, análise temporal e a geração dos gráficos de ranqueamento (Top/Bottom 10 Eficiência)**, focando na apresentação dos *insights*.
+ANALISE-ORGAO/
+│
+├── analise_base.ipynb
+├── analise_final.ipynb
+├── despesasPorOrgao.csv
+├── evolucao_mensal.png
+├── top10_mais_eficientes.png
+├── top10_menos_eficientes.png
+├── requirements.txt
+└── README.md
