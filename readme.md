@@ -118,6 +118,7 @@ Arquivo: despesasPorOrgao.csv
 Base pública utilizada para simular um cenário real de análise de dados governamentais, com problemas comuns encontrados no mercado.
 
 ## 📁 Estrutura do Repositório
+```bash
 ANALISE-ORGAO/
 │
 ├── analise_base.ipynb
@@ -128,3 +129,4 @@ ANALISE-ORGAO/
 ├── top10_menos_eficientes.png
 ├── requirements.txt
 └── README.md
+```
